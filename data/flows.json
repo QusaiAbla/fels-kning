@@ -1,0 +1,230 @@
+{
+  "flows": [
+    {
+      "id": "flow_wifi",
+      "title": "Wi-Fi fungerar inte",
+      "description": "Felsök trådlös nätverksanslutning steg för steg.",
+      "icon": "📶",
+      "status": "published",
+      "startNode": "n1",
+      "nodes": {
+        "n1": {
+          "id": "n1",
+          "type": "question",
+          "text": "Syns nätverket i listan över tillgängliga Wi-Fi-nätverk?",
+          "instructions": "Öppna nätverksinställningarna i aktivitetsfältet (Windows) eller menyraden (Mac) och kontrollera listan över nätverk i närheten.",
+          "image": "",
+          "video": "",
+          "links": [],
+          "options": [
+            { "label": "Ja, det syns", "next": "n2" },
+            { "label": "Nej, det syns inte", "next": "n5" }
+          ]
+        },
+        "n2": {
+          "id": "n2",
+          "type": "question",
+          "text": "Kan du ansluta till nätverket, men saknar internetåtkomst?",
+          "instructions": "Titta efter en varningstriangel vid Wi-Fi-ikonen — det tyder på anslutning utan internet.",
+          "image": "",
+          "video": "",
+          "links": [],
+          "options": [
+            { "label": "Ja, ansluten men ingen internet", "next": "n3" },
+            { "label": "Nej, det går inte att ansluta alls", "next": "n4" }
+          ]
+        },
+        "n3": {
+          "id": "n3",
+          "type": "result",
+          "status": "warning",
+          "title": "Starta om nätverksutrustningen",
+          "summary": [
+            "Starta om din dator och vänta 30 sekunder.",
+            "Om problemet kvarstår, starta om Wi-Fi-routern (dra ur strömmen i 10 sekunder).",
+            "Kontrollera företagets driftstatussida för pågående störningar.",
+            "Kvarstår problemet efter omstart — eskalera ärendet till IT-support."
+          ]
+        },
+        "n4": {
+          "id": "n4",
+          "type": "result",
+          "status": "danger",
+          "title": "Eskalera till IT-support",
+          "summary": [
+            "Det går inte att ansluta till nätverket alls, vilket kan bero på fel på nätverkskort eller behörighet.",
+            "Skapa ett ärende hos IT-support och bifoga felmeddelande om sådant visas.",
+            "Ange vilken enhet och vilket operativsystem du använder."
+          ]
+        },
+        "n5": {
+          "id": "n5",
+          "type": "question",
+          "text": "Är flygplansläge avstängt och Wi-Fi-adaptern påslagen?",
+          "instructions": "Kontrollera snabbinställningarna. På bärbara datorer finns ibland en fysisk Wi-Fi-brytare eller tangentbordskombination (t.ex. Fn + F2).",
+          "image": "",
+          "video": "",
+          "links": [
+            { "label": "Guide: Nätverksinställningar i Windows", "url": "https://support.microsoft.com" }
+          ],
+          "options": [
+            { "label": "Ja, det är påslaget", "next": "n4" },
+            { "label": "Nej, det var avstängt", "next": "n6" }
+          ]
+        },
+        "n6": {
+          "id": "n6",
+          "type": "result",
+          "status": "success",
+          "title": "Problemet är löst",
+          "summary": [
+            "Wi-Fi-adaptern var avstängd och har nu aktiverats.",
+            "Anslut till rätt nätverk och ange lösenord vid behov.",
+            "Kontakta IT-support om anslutningen fortfarande inte fungerar."
+          ]
+        }
+      }
+    },
+    {
+      "id": "flow_printer",
+      "title": "Skrivaren skriver inte ut",
+      "description": "Steg för att felsöka utskriftsproblem i kontorsmiljö.",
+      "icon": "🖨️",
+      "status": "published",
+      "startNode": "p1",
+      "nodes": {
+        "p1": {
+          "id": "p1",
+          "type": "question",
+          "text": "Visar skrivaren några felmeddelanden eller varningslampor?",
+          "instructions": "Kontrollera skrivarens display eller indikatorlampor för pappersstopp, låg toner eller liknande.",
+          "image": "",
+          "video": "",
+          "links": [],
+          "options": [
+            { "label": "Ja, ett felmeddelande visas", "next": "p2" },
+            { "label": "Nej, inga fel visas", "next": "p3" }
+          ]
+        },
+        "p2": {
+          "id": "p2",
+          "type": "result",
+          "status": "warning",
+          "title": "Åtgärda enligt felmeddelande",
+          "summary": [
+            "Läs felmeddelandet noggrant — vanligast är pappersstopp eller slut på toner/bläck.",
+            "Öppna luckor försiktigt och avlägsna fastnat papper enligt skrivarens manual.",
+            "Byt tonerkassett om varningen gäller låg nivå.",
+            "Kontakta IT-support om felkoden inte finns dokumenterad."
+          ]
+        },
+        "p3": {
+          "id": "p3",
+          "type": "question",
+          "text": "Är skrivaren markerad som online och vald som standardskrivare på din dator?",
+          "instructions": "Gå till Inställningar → Skrivare och skannrar och kontrollera status.",
+          "image": "",
+          "video": "",
+          "links": [
+            { "label": "Guide: Lägg till eller hantera skrivare", "url": "https://support.microsoft.com" }
+          ],
+          "options": [
+            { "label": "Ja, allt ser korrekt ut", "next": "p4" },
+            { "label": "Nej, den är offline eller fel vald", "next": "p5" }
+          ]
+        },
+        "p4": {
+          "id": "p4",
+          "type": "result",
+          "status": "danger",
+          "title": "Eskalera till IT-support",
+          "summary": [
+            "Grundläggande kontroller visar inga uppenbara fel.",
+            "Skapa ett IT-ärende och ange skrivarens namn/plats samt felets natur.",
+            "Bifoga skärmdump av eventuellt felmeddelande i utskriftskön."
+          ]
+        },
+        "p5": {
+          "id": "p5",
+          "type": "result",
+          "status": "success",
+          "title": "Skrivare återansluten",
+          "summary": [
+            "Sätt skrivaren online och välj den som standardskrivare.",
+            "Skriv ut en testsida för att bekräfta att det fungerar.",
+            "Starta om utskriftskön om problemet kvarstår."
+          ]
+        }
+      }
+    },
+    {
+      "id": "flow_login",
+      "title": "Kan inte logga in",
+      "description": "Vägledning vid problem med inloggning till företagskontot.",
+      "icon": "🔒",
+      "status": "published",
+      "startNode": "l1",
+      "nodes": {
+        "l1": {
+          "id": "l1",
+          "type": "question",
+          "text": "Får du ett felmeddelande om felaktigt lösenord?",
+          "instructions": "Kontrollera att Caps Lock inte är aktiverat och att du använder rätt användarnamn.",
+          "image": "",
+          "video": "",
+          "links": [],
+          "options": [
+            { "label": "Ja, fel lösenord anges", "next": "l2" },
+            { "label": "Nej, ett annat fel visas", "next": "l3" }
+          ]
+        },
+        "l2": {
+          "id": "l2",
+          "type": "result",
+          "status": "warning",
+          "title": "Återställ lösenordet",
+          "summary": [
+            "Använd länken \"Glömt lösenord\" på inloggningssidan.",
+            "Följ instruktionerna som skickas till din registrerade e-post.",
+            "Kontakta IT-support om du inte får något återställningsmejl inom 10 minuter."
+          ]
+        },
+        "l3": {
+          "id": "l3",
+          "type": "question",
+          "text": "Gäller felet tvåfaktorsautentisering (kod från app eller SMS)?",
+          "instructions": "Kontrollera att klockan på din telefon är korrekt inställd, då detta påverkar engångskoder.",
+          "image": "",
+          "video": "",
+          "links": [],
+          "options": [
+            { "label": "Ja, koden fungerar inte", "next": "l4" },
+            { "label": "Nej, annat problem", "next": "l5" }
+          ]
+        },
+        "l4": {
+          "id": "l4",
+          "type": "result",
+          "status": "warning",
+          "title": "Synkronisera autentiseringsappen",
+          "summary": [
+            "Kontrollera datum och tid-inställningar på din telefon (använd \"automatisk\" tid).",
+            "Vänta på nästa kodintervall och försök igen.",
+            "Kontakta IT-support för att återställa tvåfaktorsautentisering om problemet kvarstår."
+          ]
+        },
+        "l5": {
+          "id": "l5",
+          "type": "result",
+          "status": "danger",
+          "title": "Eskalera till IT-support",
+          "summary": [
+            "Problemet kunde inte identifieras med automatisk felsökning.",
+            "Skapa ett ärende och beskriv exakt felmeddelande samt vilken tjänst du försöker logga in på.",
+            "IT-support kan behöva verifiera din identitet innan kontot återställs."
+          ]
+        }
+      }
+    }
+  ]
+}

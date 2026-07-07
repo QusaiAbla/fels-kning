@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT-Hjälpen — Felsökning &amp; användarstöd</title>
+<meta name="description" content="Intern IT-supportportal för felsökning och stöd.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <div class="brand__mark">IT</div>
+    <div>
+      <h1 class="brand__title">IT-Hjälpen</h1>
+      <div class="brand__subtitle">Intern supportportal</div>
+    </div>
+  </div>
+  <div class="header-status">
+    <span class="dot dot--success"></span>
+    Alla system fungerar normalt
+  </div>
+</header>
+
+<!-- ============ HOME VIEW ============ -->
+<main class="main" id="view-home">
+  <section class="hero">
+    <span class="hero__eyebrow">Självhjälp · steg-för-steg</span>
+    <h1>Vad kan vi hjälpa dig med idag?</h1>
+    <p>Välj ett problemområde nedan så guidar vi dig genom felsökningen — ett steg i taget. De flesta ärenden löser sig direkt här, men du kan alltid eskalera till IT-support.</p>
+  </section>
+
+  <p class="section-label">Tillgängliga flöden</p>
+  <div class="flow-grid" id="flow-grid">
+    <!-- flow cards injected by JS -->
+  </div>
+</main>
+
+<!-- ============ FLOW (QUESTION) VIEW ============ -->
+<div class="flow-shell hidden" id="view-flow">
+  <div class="progress-track" id="progress-track"></div>
+  <div class="flow-topbar">
+    <button class="btn-back" id="btn-back">&larr; Tillbaka</button>
+    <span class="step-counter" id="step-counter"></span>
+  </div>
+  <div id="question-card-slot"></div>
+</div>
+
+<!-- ============ RESULT VIEW ============ -->
+<div class="flow-shell hidden" id="view-result">
+  <div class="flow-topbar">
+    <button class="btn-back" id="btn-back-result">&larr; Tillbaka</button>
+    <span class="step-counter">Resultat</span>
+  </div>
+  <div id="result-card-slot"></div>
+</div>
+
+<button class="admin-fab" id="admin-fab">
+  <span aria-hidden="true">⚙</span> Admin
+</button>
+
+<p class="footer-note">IT-HJÄLPEN © <span id="year"></span> — Intern support · Statisk drift</p>
+
+<!-- ============ ADMIN PIN MODAL ============ -->
+<div class="modal-overlay hidden" id="pin-modal">
+  <div class="modal">
+    <div class="modal__header">
+      <h3>Administratörsinloggning</h3>
+      <button class="modal__close" id="pin-close" aria-label="Stäng">&times;</button>
+    </div>
+    <div class="modal__body">
+      <p>Ange administratörskoden för att öppna adminpanelen.</p>
+      <input type="password" inputmode="numeric" maxlength="6" class="pin-input" id="pin-input" placeholder="••••••" autocomplete="off">
+      <div class="field-error" id="pin-error"></div>
+      <button class="btn btn-primary" id="pin-submit" style="width:100%; margin-top:10px;">Logga in</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
