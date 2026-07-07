@@ -17,8 +17,14 @@
           "video": "",
           "links": [],
           "options": [
-            { "label": "Ja, det syns", "next": "n2" },
-            { "label": "Nej, det syns inte", "next": "n5" }
+            {
+              "label": "Ja, det syns",
+              "next": "n2"
+            },
+            {
+              "label": "Nej, det syns inte",
+              "next": "n5"
+            }
           ]
         },
         "n2": {
@@ -30,8 +36,14 @@
           "video": "",
           "links": [],
           "options": [
-            { "label": "Ja, ansluten men ingen internet", "next": "n3" },
-            { "label": "Nej, det går inte att ansluta alls", "next": "n4" }
+            {
+              "label": "Ja, ansluten men ingen internet",
+              "next": "n3"
+            },
+            {
+              "label": "Nej, det går inte att ansluta alls",
+              "next": "n4"
+            }
           ]
         },
         "n3": {
@@ -65,11 +77,20 @@
           "image": "",
           "video": "",
           "links": [
-            { "label": "Guide: Nätverksinställningar i Windows", "url": "https://support.microsoft.com" }
+            {
+              "label": "Guide: Nätverksinställningar i Windows",
+              "url": "https://support.microsoft.com"
+            }
           ],
           "options": [
-            { "label": "Ja, det är påslaget", "next": "n4" },
-            { "label": "Nej, det var avstängt", "next": "n6" }
+            {
+              "label": "Ja, det är påslaget",
+              "next": "n4"
+            },
+            {
+              "label": "Nej, det var avstängt",
+              "next": "n6"
+            }
           ]
         },
         "n6": {
@@ -102,8 +123,14 @@
           "video": "",
           "links": [],
           "options": [
-            { "label": "Ja, ett felmeddelande visas", "next": "p2" },
-            { "label": "Nej, inga fel visas", "next": "p3" }
+            {
+              "label": "Ja, ett felmeddelande visas",
+              "next": "p2"
+            },
+            {
+              "label": "Nej, inga fel visas",
+              "next": "p3"
+            }
           ]
         },
         "p2": {
@@ -126,11 +153,20 @@
           "image": "",
           "video": "",
           "links": [
-            { "label": "Guide: Lägg till eller hantera skrivare", "url": "https://support.microsoft.com" }
+            {
+              "label": "Guide: Lägg till eller hantera skrivare",
+              "url": "https://support.microsoft.com"
+            }
           ],
           "options": [
-            { "label": "Ja, allt ser korrekt ut", "next": "p4" },
-            { "label": "Nej, den är offline eller fel vald", "next": "p5" }
+            {
+              "label": "Ja, allt ser korrekt ut",
+              "next": "p4"
+            },
+            {
+              "label": "Nej, den är offline eller fel vald",
+              "next": "p5"
+            }
           ]
         },
         "p4": {
@@ -174,8 +210,14 @@
           "video": "",
           "links": [],
           "options": [
-            { "label": "Ja, fel lösenord anges", "next": "l2" },
-            { "label": "Nej, ett annat fel visas", "next": "l3" }
+            {
+              "label": "Ja, fel lösenord anges",
+              "next": "l2"
+            },
+            {
+              "label": "Nej, ett annat fel visas",
+              "next": "l3"
+            }
           ]
         },
         "l2": {
@@ -198,8 +240,14 @@
           "video": "",
           "links": [],
           "options": [
-            { "label": "Ja, koden fungerar inte", "next": "l4" },
-            { "label": "Nej, annat problem", "next": "l5" }
+            {
+              "label": "Ja, koden fungerar inte",
+              "next": "l4"
+            },
+            {
+              "label": "Nej, annat problem",
+              "next": "l5"
+            }
           ]
         },
         "l4": {
