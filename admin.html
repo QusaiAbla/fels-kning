@@ -3,162 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adminpanel — IT-Hjälpen</title>
+<title>IT-Hjälpen — Felsökning &amp; användarstöd</title>
+<meta name="description" content="Intern IT-supportportal för felsökning och stöd.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 
-<!-- ============ LOGIN GATE ============ -->
-<div class="modal-overlay" id="login-gate" style="position:fixed; background:var(--color-primary);">
+<header class="app-header">
+  <div class="brand">
+    <div class="brand__mark">IT</div>
+    <div>
+      <h1 class="brand__title">IT-Hjälpen</h1>
+      <!-- Undertext "Intern supportportal" borttagen -->
+    </div>
+  </div>
+  <!-- Status/system-raden borttagen -->
+</header>
+
+<!-- ============ HOME VIEW ============ -->
+<main class="main" id="view-home">
+  <section class="hero">
+    <span class="hero__eyebrow">Självhjälp · steg-för-steg</span>
+    <h1>Vad behöver du hjälp med?</h1>
+    <p>Välj ett område nedan så guidar vi dig steg för steg. De flesta problem löses här, annars kan du kontakta ServiceDesk.</p>
+  </section>
+
+  <p class="section-label">Tillgängliga flöden</p>
+  <div class="flow-grid" id="flow-grid">
+    <!-- flow cards injected by JS -->
+  </div>
+</main>
+
+<!-- ============ FLOW (QUESTION) VIEW ============ -->
+<div class="flow-shell hidden" id="view-flow">
+  <div class="progress-track" id="progress-track"></div>
+  <div class="flow-topbar">
+    <button class="btn-back" id="btn-back">&larr; Tillbaka</button>
+    <span class="step-counter" id="step-counter"></span>
+  </div>
+  <div id="question-card-slot"></div>
+</div>
+
+<!-- ============ RESULT VIEW ============ -->
+<div class="flow-shell hidden" id="view-result">
+  <div class="flow-topbar">
+    <button class="btn-back" id="btn-back-result">&larr; Tillbaka</button>
+    <span class="step-counter">Resultat</span>
+  </div>
+  <div id="result-card-slot"></div>
+</div>
+
+<button class="admin-fab" id="admin-fab">
+  <span aria-hidden="true">⚙</span> Admin
+</button>
+
+<!-- Footer borttagen -->
+
+<!-- ============ ADMIN PIN MODAL ============ -->
+<div class="modal-overlay hidden" id="pin-modal">
   <div class="modal">
     <div class="modal__header">
       <h3>Administratörsinloggning</h3>
-      <a href="index.html" class="modal__close" aria-label="Till startsidan">&times;</a>
+      <button class="modal__close" id="pin-close" aria-label="Stäng">&times;</button>
     </div>
     <div class="modal__body">
-      <p>Ange administratörskoden för att fortsätta till adminpanelen.</p>
-      <input type="password" inputmode="numeric" maxlength="6" class="pin-input" id="gate-pin-input" placeholder="••••••" autocomplete="off">
-      <div class="field-error" id="gate-pin-error"></div>
-      <button class="btn btn-primary" id="gate-pin-submit" style="width:100%; margin-top:10px;">Logga in</button>
+      <p>Ange administratörskoden för att öppna adminpanelen.</p>
+      <input type="password" inputmode="numeric" maxlength="6" class="pin-input" id="pin-input" placeholder="••••••" autocomplete="off">
+      <div class="field-error" id="pin-error"></div>
+      <button class="btn btn-primary" id="pin-submit" style="width:100%; margin-top:10px;">Logga in</button>
     </div>
   </div>
 </div>
 
-<!-- ============ ADMIN SHELL ============ -->
-<div class="admin-shell hidden" id="admin-shell">
-  <aside class="admin-sidebar">
-    <div class="brand">
-      <div class="brand__mark">IT</div>
-      <div>
-        <h1 class="brand__title" style="font-size:16px;">IT-Hjälpen</h1>
-        <div class="brand__subtitle">Adminpanel</div>
-      </div>
-    </div>
-    <nav class="admin-nav">
-      <button class="admin-nav__item is-active" data-view="dashboard">📊&nbsp; Översikt</button>
-      <button class="admin-nav__item" data-view="flows">🗂️&nbsp; Flöden</button>
-      <button class="admin-nav__item" data-view="builder">🧩&nbsp; Flödesbyggare</button>
-      <button class="admin-nav__item" data-view="settings">⚙️&nbsp; Inställningar</button>
-    </nav>
-    <div class="admin-nav__spacer"></div>
-    <div class="admin-sidebar__footer">
-      <a href="index.html" style="display:block; color:#C7D8E8; font-size:13px; margin-bottom:12px;">&larr; Till startsidan</a>
-      <button class="btn-logout" id="logout-btn">Logga ut</button>
-    </div>
-  </aside>
-
-  <main class="admin-main">
-
-    <!-- DASHBOARD -->
-    <section class="admin-view is-active" id="view-dashboard">
-      <div class="admin-topbar"><h1>Översikt</h1></div>
-      <div class="flow-grid" style="margin-bottom:28px;" id="dashboard-stats"></div>
-      <div class="admin-panel">
-        <div class="admin-panel__header"><h3>Senaste flöden</h3></div>
-        <div class="admin-panel__body" id="dashboard-recent"></div>
-      </div>
-    </section>
-
-    <!-- FLOWS LIST -->
-    <section class="admin-view" id="view-flows">
-      <div class="admin-topbar">
-        <h1>Flöden</h1>
-        <button class="btn btn-primary" id="new-flow-btn">+ Nytt flöde</button>
-      </div>
-      <div class="admin-panel">
-        <div class="admin-panel__body" style="padding:0;">
-          <table class="flow-table">
-            <thead>
-              <tr>
-                <th>Namn</th><th>Status</th><th>Steg</th><th>Ikon</th><th></th>
-              </tr>
-            </thead>
-            <tbody id="flows-table-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- BUILDER -->
-    <section class="admin-view" id="view-builder">
-      <div class="admin-topbar">
-        <h1 id="builder-title">Flödesbyggare</h1>
-        <div style="display:flex; gap:10px;">
-          <select id="builder-flow-select" style="min-width:220px;"></select>
-          <button class="btn btn-ghost btn-sm" id="add-node-btn">+ Ny nod</button>
-        </div>
-      </div>
-      <div class="builder-layout" id="builder-layout">
-        <div class="empty-hint" id="builder-empty">Skapa eller välj ett flöde för att börja bygga.</div>
-      </div>
-    </section>
-
-    <!-- SETTINGS -->
-    <section class="admin-view" id="view-settings">
-      <div class="admin-topbar"><h1>Inställningar</h1></div>
-
-      <div class="admin-panel" style="margin-bottom:20px;">
-        <div class="admin-panel__header"><h3>Byt administratörskod</h3></div>
-        <div class="admin-panel__body">
-          <div class="form-grid-2">
-            <div class="form-row">
-              <label for="current-pin">Nuvarande kod</label>
-              <input type="password" id="current-pin" maxlength="6" inputmode="numeric">
-            </div>
-            <div class="form-row">
-              <label for="new-pin">Ny kod (4–6 siffror)</label>
-              <input type="password" id="new-pin" maxlength="6" inputmode="numeric">
-            </div>
-          </div>
-          <div class="field-error" id="pin-change-error"></div>
-          <button class="btn btn-primary" id="change-pin-btn">Uppdatera kod</button>
-        </div>
-      </div>
-
-      <div class="admin-panel" style="margin-bottom:20px;">
-        <div class="admin-panel__header"><h3>Organisationsuppgifter</h3></div>
-        <div class="admin-panel__body">
-          <div class="form-grid-2">
-            <div class="form-row">
-              <label for="org-name">Organisationsnamn</label>
-              <input type="text" id="org-name">
-            </div>
-            <div class="form-row">
-              <label for="support-email">IT-supportens e-post</label>
-              <input type="text" id="support-email">
-            </div>
-          </div>
-          <button class="btn btn-primary" id="save-org-btn">Spara</button>
-        </div>
-      </div>
-
-      <div class="admin-panel">
-        <div class="admin-panel__header"><h3>Data &amp; export</h3></div>
-        <div class="admin-panel__body">
-          <p class="text-muted" style="font-size:13.5px;">Webbappen är statisk och lagrar dina ändringar lokalt i webbläsaren. Exportera JSON-filerna och lägg dem i <code>/data</code>-mappen i GitHub-repot för att publicera ändringarna permanent.</p>
-          <div class="badge-group" style="margin-top:14px; flex-wrap:wrap;">
-            <button class="btn btn-ghost btn-sm" id="export-flows-btn">Exportera flows.json</button>
-            <button class="btn btn-ghost btn-sm" id="export-config-btn">Exportera config.json</button>
-            <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
-              Importera flows.json
-              <input type="file" id="import-flows-input" accept="application/json" style="display:none;">
-            </label>
-            <button class="btn btn-ghost btn-sm" id="reset-flows-btn">Återställ till serverversion</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<div class="toast" id="toast"></div>
-
 <script src="js/store.js"></script>
-<script src="js/admin.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
